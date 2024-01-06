@@ -6,8 +6,8 @@ use rocket_dyn_templates::{Template, context};
 #[macro_use] extern crate rocket;
 
 #[get("/")]
-fn index() -> &'static str {
-    "Hello, world!"
+async fn index() -> Result<Template, std::io::Error> {
+    files(Path::new("index.md").to_path_buf()).await
 }
 
 #[get("/<file..>")]
