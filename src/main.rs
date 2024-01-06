@@ -4,7 +4,7 @@ use error::Error;
 
 use std::path::{Path, PathBuf};
 
-use rocket::tokio::fs::{self};
+use rocket::{tokio::fs::{self}, fs::FileServer};
 use rocket_dyn_templates::Template;
 use serde::{Serialize, Deserialize};
 
@@ -28,11 +28,11 @@ struct Response {
 
 #[get("/")]
 async fn index() -> Result<Template, Error> {
-    files(Path::new("index.md").to_path_buf()).await
+    content(Path::new("index.md").to_path_buf()).await
 }
 
-#[get("/<file..>")]
-async fn files(file: PathBuf) -> Result<Template, Error> {
+#[get("/<file..>", rank = 20)]
+async fn content(file: PathBuf) -> Result<Template, Error> {
     let title = file.to_str().expect("invalid file").to_string();
     let path = Path::new("content/").join(file);
     let ext = path
@@ -73,6 +73,7 @@ async fn files(file: PathBuf) -> Result<Template, Error> {
 #[launch]
 fn rocket() -> _ {
     rocket::build()
-        .mount("/", routes![index, files])
+        .mount("/static", FileServer::from("content/"))
+        .mount("/", routes![index, content])
         .attach(Template::fairing())
 }
