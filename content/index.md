@@ -1,3 +1,6 @@
+title: Index
+^^^
+
 # Index
 
 Hi
