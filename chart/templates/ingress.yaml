@@ -4,8 +4,7 @@ metadata:
   name: {{ .Release.Name }}
 spec:
   rules:
-  - host: {{ .Values.domain }}
-    http:
+  - http:
       paths:
       - path: /
         pathType: Prefix

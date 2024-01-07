@@ -17,11 +17,11 @@ spec:
       - name: marker
         image: zvonimir/marker:{{ .Chart.AppVersion }}
         ports:
-        - name: http
-          containerPort: {{ .Values.port }}
-          protocol: TCP
+        - containerPort: {{ .Values.port }}
         env:
+        - name: ROCKET_ADDRESS
+          value: "0.0.0.0"
         - name: ROCKET_PORT
-          value: {{ .Values.port }}
+          value: "{{ .Values.port }}"
         command: [/usr/local/bin/marker]
         args: [{{ .Values.content }}]

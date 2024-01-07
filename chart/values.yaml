@@ -1,4 +1,4 @@
 domain: marker
-port: 80
+port: 8080
 templates: /var/templates
 content: /var/content
