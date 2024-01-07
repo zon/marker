@@ -1,0 +1,4 @@
+domain: marker
+port: 80
+templates: /var/templates
+content: /var/content

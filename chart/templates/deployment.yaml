@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: marker
+        image: zvonimir/marker:{{ .Chart.AppVersion }}
+        ports:
+        - name: http
+          containerPort: {{ .Values.port }}
+          protocol: TCP
+        env:
+        - name: ROCKET_PORT
+          value: {{ .Values.port }}
+        command: [/usr/local/bin/marker]
+        args: [{{ .Values.content }}]
