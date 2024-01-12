@@ -2,4 +2,4 @@
 
 set -e
 
-helm upgrade --install --create-namespace --namespace marker marker chart
+helm upgrade --install --create-namespace --namespace marker marker charts/marker

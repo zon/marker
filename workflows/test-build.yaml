@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: test-repo-
+spec:
+  entrypoint: clone
+  templates:
+  - name: clone
+    inputs:
+      artifacts:
+      - name: repo
+        path: /src
+        git:
+          repo: git@github.com:zon/marker.git
+          revision: main
+          sshPrivateKeySecret:
+            name: git
+            key: sshPrivateKey
+          singleBranch: true
+          branch: main
+          depth: 1
+    container:
+      image: zvonimir/marker-builder:0.0.0
+      workingDir: /src
+      command: [sh]
+      args:
+      - -exc
+      - |
+        cargo build --release
+        ls target/release/marker
