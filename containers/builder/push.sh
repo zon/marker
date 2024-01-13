@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 
 set -ex
 
-SOURCE=$(dirname $BASH_SOURCE[0])
+SOURCE=$(dirname $0)
 
 IMAGE=zvonimir/marker-builder
 VERSION=$(cat $SOURCE/version)
