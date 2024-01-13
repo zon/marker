@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -ex
 
@@ -14,5 +14,5 @@ cargo build --release
 podman build --tag $IMAGE:$VERSION .
 podman tag $IMAGE:$VERSION $IMAGE:latest
 
-# podman push $IMAGE:$VERSION
-# podman push $IMAGE:latest
+podman push $IMAGE:$VERSION
+podman push $IMAGE:latest

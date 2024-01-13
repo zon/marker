@@ -1,4 +1,5 @@
 FROM alpine:3.19
+RUN apk add --no-cache curl
 COPY target/release/marker /usr/local/bin/marker
 COPY content /var/content
 COPY templates /var/templates

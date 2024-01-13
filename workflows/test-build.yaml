@@ -20,11 +20,11 @@ spec:
           branch: main
           depth: 1
     container:
-      image: zvonimir/marker-builder:0.0.0
+      image: zvonimir/marker-builder:0.2.0
       workingDir: /src
-      command: [sh]
+      command: [bash]
       args:
       - -exc
       - |
-        cargo build --release
-        ls target/release/marker
+        cd containers/app
+        ./push.sh
