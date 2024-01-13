@@ -6,4 +6,4 @@
 #     echo "workflow:100000:65536" > /etc/subgid
 
 FROM quay.io/podman/stable:v4.8.3
-VOLUME /var/lib/containers
+COPY storage.conf /home/podman/.config/containers/storage.conf 

@@ -28,8 +28,7 @@ spec:
     #   hostPath:
     #     path: /home/zon/.local/share/containers
     container:
-      # image: zvonimir/marker-builder:1.0.0
-      image: gcr.io/kaniko-project/executor:latest
+      image: zvonimir/marker-builder:1.0.1
       # volumeMounts:
       # - mountPath: /home/podman/.local/share/containers
       #   name: podman-local
