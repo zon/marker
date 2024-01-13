@@ -1,3 +1,9 @@
-FROM rust:1.75-alpine3.19
-RUN apk add --no-cache bash musl-dev podman
-RUN cargo install cargo-get 
+# FROM rust:1.75-alpine3.19
+# RUN apk add --no-cache bash musl-dev podman slirp4netns
+# RUN cargo install cargo-get
+# RUN addgroup workflow && adduser -D workflow -G workflow
+# RUN echo "workflow:100000:65536" > /etc/subuid && \
+#     echo "workflow:100000:65536" > /etc/subgid
+
+FROM quay.io/podman/stable:v4.8.3
+VOLUME /var/lib/containers

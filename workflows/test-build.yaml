@@ -4,6 +4,10 @@ metadata:
   generateName: test-repo-
 spec:
   entrypoint: clone
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    runAsGroup: 1000
   templates:
   - name: clone
     inputs:
@@ -19,12 +23,21 @@ spec:
           singleBranch: true
           branch: main
           depth: 1
+    # volumes:
+    # - name: podman-local
+    #   hostPath:
+    #     path: /home/zon/.local/share/containers
     container:
-      image: zvonimir/marker-builder:0.2.0
+      # image: zvonimir/marker-builder:1.0.0
+      image: gcr.io/kaniko-project/executor:latest
+      # volumeMounts:
+      # - mountPath: /home/podman/.local/share/containers
+      #   name: podman-local
       workingDir: /src
       command: [bash]
       args:
       - -exc
       - |
-        cd containers/app
-        ./push.sh
+        id
+        podman info
+        podman run ubi8 echo hello
