@@ -1,4 +1,5 @@
 domain: marker
 port: 8080
-templates: /var/templates
-content: /var/content
+templates: /opt/marker/templates
+content: /opt/marker/content
+static: /opt/marker/static
