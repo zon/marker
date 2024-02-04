@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ .Release.Name }}{{ .Values.suffix }}
   labels:
     app: {{ .Release.Name }}
 spec:
@@ -16,6 +16,9 @@ spec:
       containers:
       - name: marker
         image: zvonimir/marker:{{ .Chart.AppVersion }}
+        volumeMounts:
+        - name: {{ .Release.Name }}-{{ .Values.volumeSuffix }}
+          mountPath: /opt/marker
         ports:
         - containerPort: {{ .Values.port }}
         command: [/usr/local/bin/marker]
@@ -28,3 +31,8 @@ spec:
         - {{ .Values.templates }}
         - --static
         - {{ .Values.static }}
+      volumes:
+      - name: {{ .Release.Name }}-{{ .Values.volumeSuffix }}
+        nfs:
+          server: {{ .Values.nfs.server }}
+          path: {{ .Values.nfs.path }}

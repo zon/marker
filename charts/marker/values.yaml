@@ -1,5 +1,10 @@
+suffix: ""
 domain: marker
 port: 8080
 templates: /opt/marker/templates
 content: /opt/marker/content
 static: /opt/marker/static
+nfs:
+  server: 192.168.0.106
+  path: /volume1/marker
+volumeSuffix: content
